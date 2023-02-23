@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "748171418327",
+    "project_id": "hivemind-1",
+    "storage_bucket": "hivemind-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748171418327:android:fc96703f36542302efae92",
+        "android_client_info": {
+          "package_name": "com.example.hive_mind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748171418327-kmov4r7pp9s0ut5e17f9rf69os6ig7rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC3Z3468NPqOwGy7FC8ehyaXlce2KVvJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748171418327-kmov4r7pp9s0ut5e17f9rf69os6ig7rj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748171418327-k1lbd780jfm6itukensno7704i97195n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hiveMind"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
