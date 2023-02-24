@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/model/services/session_manager.dart';
 import 'package:hive_mind/res/color.dart';
+import 'package:hive_mind/view/dashboard/chat/message_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -37,6 +39,16 @@ class _UserListScreenState extends State<UserListScreen> {
                     } else {
                       return Card(
                         child: ListTile(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(context,
+                                screen: MessageScreen(
+                                    name: document.docs[index].get('userName'),
+                                    email: document.docs[index].get('email'),
+                                    image: document.docs[index]
+                                        .get('profileImage'),
+                                    recieverUid: document.docs[index].get('uid')),
+                                withNavBar: false);
+                          },
                           leading: Container(
                               height: 40,
                               width: 40,
@@ -44,21 +56,20 @@ class _UserListScreenState extends State<UserListScreen> {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                       color: AppColors.primaryIconColor)),
-                              child: document.docs[index]
-                                          .get('profileImage') ==
-                                      ''
-                                  ? const Icon(Icons.person_outline)
-                                  : ClipRRect(
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(50)),
-                                      child: Image(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          document.docs[index]
-                                              .get('profileImage'),
-                                        ),
-                                      ),
-                                    )),
+                              child:
+                                  document.docs[index].get('profileImage') == ''
+                                      ? const Icon(Icons.person_outline)
+                                      : ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(50)),
+                                          child: Image(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(
+                                              document.docs[index]
+                                                  .get('profileImage'),
+                                            ),
+                                          ),
+                                        )),
                           title: Text(
                             document.docs[index].get('userName'),
                           ),

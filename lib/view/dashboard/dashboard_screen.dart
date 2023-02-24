@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/res/color.dart';
 import 'package:hive_mind/view/dashboard/home_screen/home_screen.dart';
@@ -28,20 +29,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<PersistentBottomNavBarItem> _navBarItems() {
     return [
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home, color: Colors.white),
-          inactiveIcon: Icon(Icons.home, color: Colors.grey.shade100),
+          icon: const Icon(CupertinoIcons.home, color: Colors.white),
+          inactiveIcon: Icon(CupertinoIcons.home, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.message, color: Colors.white),
+          icon: const Icon(CupertinoIcons.chat_bubble_2, color: Colors.white),
           activeColorPrimary: AppColors.primaryIconColor,
-          inactiveIcon: Icon(Icons.message, color: Colors.grey.shade100)),
+          inactiveIcon:
+              Icon(CupertinoIcons.chat_bubble_2, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.add, color: Colors.white),
           activeColorPrimary: AppColors.primaryIconColor,
           inactiveIcon: Icon(Icons.add, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home, color: Colors.white),
-          inactiveIcon: Icon(Icons.home, color: Colors.grey.shade100),
+          icon: const Icon(CupertinoIcons.person_2, color: Colors.white),
+          inactiveIcon:
+              Icon(CupertinoIcons.person_2, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.person_outline, color: Colors.white),
