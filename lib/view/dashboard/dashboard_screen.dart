@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_mind/res/color.dart';
+import 'package:hive_mind/resources/color.dart';
 import 'package:hive_mind/view/dashboard/home_screen/home_screen.dart';
 import 'package:hive_mind/view/dashboard/profile/profile_screen.dart';
 import 'package:hive_mind/view/dashboard/user/user_list_screen.dart';

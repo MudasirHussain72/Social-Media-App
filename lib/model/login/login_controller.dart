@@ -19,16 +19,13 @@ class LoginController with ChangeNotifier {
   void login(BuildContext context, String email, String password) async {
     setLoading(true);
     try {
-      // ignore: unused_local_variable
       final user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
         SessionController().userId = value.user!.uid.toString();
         setLoading(false);
-        // Navigator.pushNamed(context, RouteName.dashboardView);
         Navigator.pushNamedAndRemoveUntil(
             context, RouteName.dashboardView, (route) => false);
-
         Utils.toastMessage("User login successfully");
         setLoading(false);
       }).onError((error, stackTrace) {

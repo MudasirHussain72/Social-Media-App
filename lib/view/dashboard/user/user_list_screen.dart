@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/model/services/session_manager.dart';
-import 'package:hive_mind/res/color.dart';
+import 'package:hive_mind/resources/color.dart';
 import 'package:hive_mind/view/dashboard/chat/message_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 

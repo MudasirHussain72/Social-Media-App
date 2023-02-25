@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_mind/model/login/login_controller.dart';
-import 'package:hive_mind/res/components/input_text_field.dart';
-import 'package:hive_mind/res/components/round_button.dart';
+import 'package:hive_mind/resources/components/input_text_field.dart';
+import 'package:hive_mind/resources/components/round_button.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/utils/utils.dart';
 import 'package:provider/provider.dart';

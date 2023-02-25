@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/signup/signup_controller.dart';
-import 'package:hive_mind/res/components/input_text_field.dart';
-import 'package:hive_mind/res/components/round_button.dart';
+import 'package:hive_mind/provider/user_provider.dart';
+import 'package:hive_mind/resources/components/input_text_field.dart';
+import 'package:hive_mind/resources/components/round_button.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -43,8 +43,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: ChangeNotifierProvider(
-              create: (context) => SignUpController(),
-              child: Consumer<SignUpController>(
+              create: (context) => UserProvider(),
+              child: Consumer<UserProvider>(
                 builder: (context, provider, child) {
                   return SingleChildScrollView(
                     child: Column(
@@ -126,7 +126,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             loading: provider.loading,
                             onPress: () {
                               if (_formkey.currentState!.validate()) {
-                                provider.signup(
+                                // provider.signup(
+                                // context,
+                                // userNameController.text.trim().toString(),
+                                // emailController.text.trim().toString(),
+                                // passwordController.text.trim().toString());
+                                provider.signUpUser(
                                     context,
                                     userNameController.text.trim().toString(),
                                     emailController.text.trim().toString(),

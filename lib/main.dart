@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_mind/firebase_options.dart';
-import 'package:hive_mind/res/color.dart';
-import 'package:hive_mind/res/fonts.dart';
+import 'package:hive_mind/resources/color.dart';
+import 'package:hive_mind/resources/fonts.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/utils/routes/routes.dart';
 

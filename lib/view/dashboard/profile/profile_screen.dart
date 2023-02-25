@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/model/dashboard/profile/profile_controller.dart';
 import 'package:hive_mind/model/services/session_manager.dart';
-import 'package:hive_mind/res/color.dart';
+import 'package:hive_mind/resources/color.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {

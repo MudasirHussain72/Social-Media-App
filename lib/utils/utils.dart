@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hive_mind/res/color.dart';
+import 'package:hive_mind/resources/color.dart';
 
 class Utils {
   static void fieldFocus(
