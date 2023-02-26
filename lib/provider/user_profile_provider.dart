@@ -1,14 +1,15 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:hive_mind/resources/color.dart';
 import 'package:hive_mind/resources/components/input_text_field.dart';
+import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfileController with ChangeNotifier {
+class UserProfileProvider with ChangeNotifier {
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final nameFocusNode = FocusNode();

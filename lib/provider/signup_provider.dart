@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
-import 'package:hive_mind/model/signup/user_model.dart';
+import 'package:hive_mind/services/session_manager.dart';
+import 'package:hive_mind/model/user_model.dart';
 import 'package:hive_mind/repository/create_user_repository.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/utils/utils.dart';
@@ -17,7 +17,6 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  TextEditingController createdAtController = TextEditingController();
   final CreateUserRepository _userRepository = FirebaseCreateUserRepository();
 
   void signUpUser(
@@ -64,5 +63,6 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  @override
   notifyListeners();
 }

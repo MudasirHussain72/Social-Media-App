@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive_mind/model/signup/user_model.dart';
+import 'package:hive_mind/model/user_model.dart';
 
 abstract class CreateUserRepository {
   createUser(UserModel user);

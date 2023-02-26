@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/utils/utils.dart';
 
-class ForgotPasswordController with ChangeNotifier {
+class ForgotPasswordProvider with ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
   bool _loading = false;
   bool get loading => _loading;

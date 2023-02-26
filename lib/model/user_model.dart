@@ -33,16 +33,17 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['uid'] = this.uid;
-    data['about'] = this.about;
-    data['created_at'] = this.createdAt;
-    data['profileImage'] = this.profileImage;
-    data['last_active'] = this.lastActive;
-    data['is_online'] = this.isOnline;
-    data['userName'] = this.userName;
-    data['email'] = this.email;
-    data['push_token'] = this.pushToken;
+    // ignore: prefer_collection_literals
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['uid'] = uid;
+    data['about'] = about;
+    data['created_at'] = createdAt;
+    data['profileImage'] = profileImage;
+    data['last_active'] = lastActive;
+    data['is_online'] = isOnline;
+    data['userName'] = userName;
+    data['email'] = email;
+    data['push_token'] = pushToken;
     return data;
   }
 }

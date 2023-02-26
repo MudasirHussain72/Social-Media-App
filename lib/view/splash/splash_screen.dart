@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/services/splash_services.dart';
+import 'package:hive_mind/services/splash_services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

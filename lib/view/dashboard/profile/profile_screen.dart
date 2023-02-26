@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/dashboard/profile/profile_controller.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
+import 'package:hive_mind/provider/user_profile_provider.dart';
+import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/resources/color.dart';
 import 'package:provider/provider.dart';
 
@@ -23,8 +23,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
         appBar: AppBar(title: const Text('Profile Screen')),
         body: ChangeNotifierProvider(
-          create: (context) => ProfileController(),
-          child: Consumer<ProfileController>(
+          create: (context) => UserProfileProvider(),
+          child: Consumer<UserProfileProvider>(
             builder: (context, provider, child) {
               return SafeArea(
                 child: SingleChildScrollView(
@@ -37,7 +37,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             .snapshots(),
                         builder: (context, AsyncSnapshot snapshot) {
                           if (!snapshot.hasData) {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (snapshot.hasData) {
                             var document = snapshot.data;
                             return Column(
@@ -72,7 +73,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     : Image(
                                                         fit: BoxFit.cover,
                                                         image: NetworkImage(
-                                                            document!['profileImage'].toString()),
+                                                            document![
+                                                                    'profileImage']
+                                                                .toString()),
                                                         loadingBuilder: (context,
                                                             child,
                                                             loadingProgress) {
@@ -89,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           return const Icon(
                                                             Icons.error_outline,
                                                             color: AppColors
-                                                            .alertColor,
+                                                                .alertColor,
                                                           );
                                                         })
                                                 : Stack(
@@ -124,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    ProfileController()
+                                    UserProfileProvider()
                                         .updateUserInfoDialogAlert(context,
                                             document['userName'], 'userName');
                                   },

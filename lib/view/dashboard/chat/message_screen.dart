@@ -1,8 +1,8 @@
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/dashboard/chat/message_screen_controller.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
+import 'package:hive_mind/model/message_screen_controller.dart';
+import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/resources/color.dart';
 import 'package:hive_mind/utils/utils.dart';
 
@@ -64,11 +64,11 @@ class _MessageScreenState extends State<MessageScreen> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text("Loading");
+                    return const Text("Loading");
                   }
 
                   return snapshot.hasData
@@ -78,7 +78,7 @@ class _MessageScreenState extends State<MessageScreen> {
                             itemBuilder: (context, index) {
                               return BubbleSpecialThree(
                                 text: snapshot.data!.docs[index]['message'],
-                                color: Color(0xFFE8E8EE),
+                                color: const Color(0xFFE8E8EE),
                                 tail: false,
                                 isSender: MessageScreenController()
                                     .checkMessageSender(snapshot

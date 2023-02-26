@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
+import 'package:hive_mind/services/session_manager.dart';
 
 class MessageScreenController with ChangeNotifier {
   final db = FirebaseFirestore.instance.collection('messages');

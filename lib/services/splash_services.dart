@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
+import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 
 class SplashServices {

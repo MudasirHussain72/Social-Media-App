@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
+import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/utils/utils.dart';
 
-class LoginController with ChangeNotifier {
-  FirebaseAuth auth = FirebaseAuth.instance;
+class LoginProvider with ChangeNotifier {
+   FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance.collection('users');
   bool _loading = false;
   bool get loading => _loading;
@@ -19,7 +19,7 @@ class LoginController with ChangeNotifier {
   void login(BuildContext context, String email, String password) async {
     setLoading(true);
     try {
-      final user = await auth
+     auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
         SessionController().userId = value.user!.uid.toString();

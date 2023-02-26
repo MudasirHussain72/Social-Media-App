@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/services/session_manager.dart';
-import 'package:hive_mind/provider/user_provider.dart';
+import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/view/login/login_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -59,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // ),
       body: Column(
         children: [
-          TextField(
+          const TextField(
               // controller: UserProvider().aboutController,
               ),
           Center(
@@ -68,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // UserProvider().aboutController.text = 'testx'.toString();
                     // UserProvider().signUpUser();
                   },
-                  child: Text('create user'))),
+                  child: const Text('create user'))),
         ],
       ),
     );

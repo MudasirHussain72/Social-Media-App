@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/login/login_controller.dart';
+import 'package:hive_mind/provider/login_provider.dart';
 import 'package:hive_mind/resources/components/input_text_field.dart';
 import 'package:hive_mind/resources/components/round_button.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
@@ -105,8 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: size.height * .04),
                   ChangeNotifierProvider(
-                    create: (context) => LoginController(),
-                    child: Consumer<LoginController>(
+                    create: (context) => LoginProvider(),
+                    child: Consumer<LoginProvider>(
                       builder: (context, provider, child) => RoundButton(
                         loading: provider.loading,
                         title: "Login",

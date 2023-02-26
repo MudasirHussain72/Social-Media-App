@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_mind/provider/user_provider.dart';
+import 'package:hive_mind/provider/signup_provider.dart';
 import 'package:hive_mind/resources/components/input_text_field.dart';
 import 'package:hive_mind/resources/components/round_button.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';

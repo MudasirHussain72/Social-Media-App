@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_mind/model/forgot_password/forgot_password_controller.dart';
+import 'package:hive_mind/provider/forgot_pasword_provider.dart';
 import 'package:hive_mind/resources/components/input_text_field.dart';
 import 'package:hive_mind/resources/components/round_button.dart';
 import 'package:provider/provider.dart';
@@ -85,8 +85,8 @@ class _ForgotPasseordScreenState extends State<ForgotPasseordScreen> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ChangeNotifierProvider(
-                  create: (context) => ForgotPasswordController(),
-                  child: Consumer<ForgotPasswordController>(
+                  create: (context) => ForgotPasswordProvider(),
+                  child: Consumer<ForgotPasswordProvider>(
                     builder: (context, provider, child) => RoundButton(
                       loading: provider.loading,
                       title: "Login",
