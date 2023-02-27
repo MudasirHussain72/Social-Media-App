@@ -27,7 +27,7 @@ class UserModel {
     profileImage = json['profileImage'] ?? '';
     lastActive = json['last_active'] ?? '';
     isOnline = json['is_online'] ?? '';
-    userName = json['UserModelName'] ?? '';
+    userName = json['userName'] ?? '';
     email = json['email'] ?? '';
     pushToken = json['push_token'] ?? '';
   }

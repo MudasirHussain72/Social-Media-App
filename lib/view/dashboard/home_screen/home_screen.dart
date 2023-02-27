@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       // body: StreamBuilder(
-      //   stream: FirebaseFirestore.instance.collection('users').snapshots(),
+      //   stream: FirebaseFirestore.instance.collection('messages').snapshots(),
       //   builder: (BuildContext context, snapshot) {
       //     final list = [];
       //     if (snapshot.hasData) {
@@ -56,20 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
       //     );
       //   },
       // ),
-      body: Column(
-        children: [
-          const TextField(
-              // controller: UserProvider().aboutController,
-              ),
-          Center(
-              child: TextButton(
-                  onPressed: () {
-                    // UserProvider().aboutController.text = 'testx'.toString();
-                    // UserProvider().signUpUser();
-                  },
-                  child: const Text('create user'))),
-        ],
-      ),
     );
   }
 }

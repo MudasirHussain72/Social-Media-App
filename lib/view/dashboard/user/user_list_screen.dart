@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_mind/model/user_model.dart';
+import 'package:hive_mind/resources/components/user_card.dart';
 import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/resources/color.dart';
-import 'package:hive_mind/view/dashboard/chat/message_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -14,79 +15,85 @@ class UserListScreen extends StatefulWidget {
 
 class _UserListScreenState extends State<UserListScreen> {
   final db = FirebaseFirestore.instance.collection('users');
+  List<UserModel> list = [];
+  // for storing searched items
+  final List<UserModel> _searchlist = [];
+  // for storing search status
+  bool _isSearching = false;
+  //
+  String? search = "";
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('User List')),
-        body: StreamBuilder(
-          stream: db.snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.connectionState == ConnectionState.active ||
-                snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
-              } else if (snapshot.hasData) {
-                var document = snapshot.data;
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    if (SessionController().userId.toString() ==
-                        document!.docs[index].get('uid')) {
-                      return Container();
-                    } else {
-                      return Card(
-                        child: ListTile(
-                          onTap: () {
-                            PersistentNavBarNavigator.pushNewScreen(context,
-                                screen: MessageScreen(
-                                    name: document.docs[index].get('userName'),
-                                    email: document.docs[index].get('email'),
-                                    image: document.docs[index]
-                                        .get('profileImage'),
-                                    recieverUid: document.docs[index].get('uid')),
-                                withNavBar: false);
-                          },
-                          leading: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: AppColors.primaryIconColor)),
-                              child:
-                                  document.docs[index].get('profileImage') == ''
-                                      ? const Icon(Icons.person_outline)
-                                      : ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(50)),
-                                          child: Image(
-                                            fit: BoxFit.cover,
-                                            image: NetworkImage(
-                                              document.docs[index]
-                                                  .get('profileImage'),
-                                            ),
-                                          ),
-                                        )),
-                          title: Text(
-                            document.docs[index].get('userName'),
-                          ),
-                          subtitle: Text(
-                            document.docs[index].get('email'),
-                          ),
-                        ),
-                      );
+        appBar: AppBar(
+          title: _isSearching
+              ? TextField(
+                  controller: searchController,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Name....',
+                  ),
+                  autofocus: true,
+                  onChanged: (value) {
+                    _searchlist.clear();
+                    for (var i in list) {
+                      if (i.userName
+                          .toString()
+                          .toLowerCase()
+                          .contains(value.toLowerCase())) {
+                        _searchlist.add(i);
+                        setState(() {
+                          _searchlist;
+                        });
+                      }
                     }
-                    // return
                   },
-                );
-              } else {
-                return const Text('Something went wrong');
-              }
-            } else {
-              return const Text('Something went wrong');
+                )
+              : const Text('Hive Mind'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  _isSearching = !_isSearching;
+                  setState(() {});
+                },
+                icon: Icon(
+                  _isSearching
+                      ? CupertinoIcons.clear_circled_solid
+                      : Icons.search,
+                  color: AppColors.primaryColor,
+                ))
+          ],
+        ),
+        body: StreamBuilder(
+          stream: db
+              .where('uid', isNotEqualTo: SessionController().userId)
+              .snapshots(),
+          builder: (BuildContext context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+              case ConnectionState.none:
+                return const Center(child: CircularProgressIndicator());
+              case ConnectionState.active:
+              case ConnectionState.done:
+                final data = snapshot.data?.docs;
+
+                list =
+                    data?.map((e) => UserModel.fromJson(e.data())).toList() ??
+                        [];
+                if (list.isNotEmpty) {
+                  return ListView.builder(
+                    itemCount: _isSearching ? _searchlist.length : list.length,
+                    itemBuilder: (context, index) {
+                      return UserCard(
+                          user:
+                              _isSearching ? _searchlist[index] : list[index]);
+                    },
+                  );
+                } else {
+                  return const Text('No connections found');
+                }
             }
           },
         ));

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/provider/user_profile_provider.dart';
 import 'package:hive_mind/services/session_manager.dart';
@@ -132,18 +133,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             document['userName'], 'userName');
                                   },
                                   child: ReusableRow(
-                                      title: 'Name',
-                                      value: document['userName'] == ''
-                                          ? 'xxx-xxx-xxx'
-                                          : document['userName'],
-                                      iconData: Icons.person),
+                                    title: 'Name',
+                                    value: document['userName'] == ''
+                                        ? 'xxx-xxx-xxx'
+                                        : document['userName'],
+                                    iconData: CupertinoIcons.person,
+                                  ),
                                 ),
                                 InkWell(
-                                  // onTap: () {
-                                  //   ProfileController()
-                                  //       .updateUserInfoDialogAlert(context,
-                                  //           document['email'], 'email');
-                                  // },
+                                  onTap: () {
+                                    UserProfileProvider()
+                                        .updateUserInfoDialogAlert(context,
+                                            document['about'], 'about');
+                                  },
+                                  child: ReusableRow(
+                                      title: 'About',
+                                      value: document['about'] == ''
+                                          ? 'xxx-xxx-xxx'
+                                          : document['about'],
+                                      iconData: Icons.error_outline_sharp),
+                                ),
+                                InkWell(
                                   child: ReusableRow(
                                       title: '',
                                       value: document['email'] == ''
