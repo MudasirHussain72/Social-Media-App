@@ -1,10 +1,15 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_mind/provider/current_user_provider.dart';
 import 'package:hive_mind/resources/color.dart';
+import 'package:hive_mind/view/dashboard/add_post/add_post_screen.dart';
 import 'package:hive_mind/view/dashboard/home_screen/home_screen.dart';
 import 'package:hive_mind/view/dashboard/profile/profile_screen.dart';
 import 'package:hive_mind/view/dashboard/user/user_list_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -14,13 +19,24 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    super.initState();
+    addData();
+  }
+
+  addData() async {
+    CurrentUserProvider _userProvider = Provider.of(context, listen: false);
+    await _userProvider.refreshUser();
+  }
+
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
   List<Widget> _buildScreen() {
     return [
       const HomeScreen(),
       const Text('Chat'),
-      const Text('Add'),
+      const AddPostScreen(),
       const UserListScreen(),
       const ProfileScreen(),
     ];

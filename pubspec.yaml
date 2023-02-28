@@ -46,6 +46,7 @@ dependencies:
   provider: ^6.0.5
   chat_bubbles: ^1.4.0
   cached_network_image: ^3.2.3
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

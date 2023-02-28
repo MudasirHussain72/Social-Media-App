@@ -67,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           },
                         );
                       } else {
-                        return Center(child: Text('Say Hi! 👋'));
+                        return const Center(child: Text('Say Hi! 👋'));
                       }
                   }
                 },
@@ -159,7 +159,7 @@ class _ChatScreenState extends State<ChatScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: AppColors.secondaryColor,
               )),
@@ -171,12 +171,12 @@ class _ChatScreenState extends State<ChatScreen> {
               errorWidget: (context, url, error) => const Icon(Icons.person),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(widget.user.userName.toString()),
-              Text('Last seen not available')
+              const Text('Last seen not available')
             ],
           )
         ],

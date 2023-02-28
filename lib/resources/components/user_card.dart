@@ -19,16 +19,6 @@ class _UserCardState extends State<UserCard> {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        // onTap: () {
-        //   PersistentNavBarNavigator.pushNewScreen(context,
-        //       screen: MessageScreen(
-        //           name: document.docs[index].get('userName'),
-        //           email: document.docs[index].get('email'),
-        //           image:
-        //               document.docs[index].get('profileImage'),
-        //           recieverUid: document.docs[index].get('uid')),
-        //       withNavBar: false);
-        // },
         onTap: () {
           PersistentNavBarNavigator.pushNewScreen(
             context,

@@ -37,25 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.logout))
         ],
       ),
-      // body: StreamBuilder(
-      //   stream: FirebaseFirestore.instance.collection('messages').snapshots(),
-      //   builder: (BuildContext context, snapshot) {
-      //     final list = [];
-      //     if (snapshot.hasData) {
-      //       final data = snapshot.data?.docs;
-      //       for (var i in data!) {
-      //         log('data: ${jsonEncode(i.data())}');
-      //         list.add(i.data());
-      //       }
-      //     }
-      //     return ListView.builder(
-      //       itemCount: list.length,
-      //       itemBuilder: (context, index) {
-      //         return Text('');
-      //       },
-      //     );
-      //   },
-      // ),
+      body: const Center(child: Text('Home screen')),
     );
   }
 }
