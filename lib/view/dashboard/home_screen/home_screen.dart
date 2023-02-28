@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_mind/resources/components/post_card.dart';
 import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/utils/routes/route_name.dart';
 import 'package:hive_mind/view/login/login_screen.dart';
@@ -37,7 +39,22 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.logout))
         ],
       ),
-      body: const Center(child: Text('Home screen')),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) =>
+                PostCard(snap: snapshot.data!.docs[index].data()),
+          );
+        },
+      ),
     );
   }
 }

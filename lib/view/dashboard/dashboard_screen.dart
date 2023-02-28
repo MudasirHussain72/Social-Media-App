@@ -7,6 +7,7 @@ import 'package:hive_mind/resources/color.dart';
 import 'package:hive_mind/view/dashboard/add_post/add_post_screen.dart';
 import 'package:hive_mind/view/dashboard/home_screen/home_screen.dart';
 import 'package:hive_mind/view/dashboard/profile/profile_screen.dart';
+import 'package:hive_mind/view/dashboard/search/search_screen.dart';
 import 'package:hive_mind/view/dashboard/user/user_list_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<Widget> _buildScreen() {
     return [
       const HomeScreen(),
-      const Text('Chat'),
+      const SearchScreen(),
       const AddPostScreen(),
       const UserListScreen(),
       const ProfileScreen(),
@@ -49,7 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           inactiveIcon: Icon(CupertinoIcons.home, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.chat_bubble_2, color: Colors.white),
+          icon: const Icon(CupertinoIcons.search, color: Colors.white),
           activeColorPrimary: AppColors.primaryIconColor,
           inactiveIcon:
               Icon(CupertinoIcons.chat_bubble_2, color: Colors.grey.shade100)),
@@ -58,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           activeColorPrimary: AppColors.primaryIconColor,
           inactiveIcon: Icon(Icons.add, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.person_2, color: Colors.white),
+          icon: const Icon(CupertinoIcons.chat_bubble_2, color: Colors.white),
           inactiveIcon:
               Icon(CupertinoIcons.person_2, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
