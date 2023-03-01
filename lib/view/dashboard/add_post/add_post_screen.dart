@@ -102,7 +102,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     captionController.dispose();
   }
@@ -142,8 +141,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
             body: Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Column(children: [
-                isLoading ? LinearProgressIndicator() : Container(),
-                SizedBox(height: 10),
+                isLoading ? const LinearProgressIndicator() : Container(),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,

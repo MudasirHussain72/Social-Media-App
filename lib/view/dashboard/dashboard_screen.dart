@@ -46,25 +46,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<PersistentBottomNavBarItem> _navBarItems() {
     return [
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.home, color: Colors.white),
-          inactiveIcon: Icon(CupertinoIcons.home, color: Colors.grey.shade100),
+          icon: const Icon(Icons.home, color: AppColors.secondaryColor),
+          inactiveIcon: Icon(Icons.home, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.search, color: Colors.white),
+          icon: const Icon(CupertinoIcons.search,
+              color: AppColors.secondaryColor),
           activeColorPrimary: AppColors.primaryIconColor,
           inactiveIcon:
-              Icon(CupertinoIcons.chat_bubble_2, color: Colors.grey.shade100)),
+              Icon(CupertinoIcons.search, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.add, color: Colors.white),
+          icon: const Icon(Icons.add, color: AppColors.secondaryColor),
           activeColorPrimary: AppColors.primaryIconColor,
           inactiveIcon: Icon(Icons.add, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.chat_bubble_2, color: Colors.white),
+          icon: const Icon(CupertinoIcons.chat_bubble_2,
+              color: AppColors.secondaryColor),
           inactiveIcon:
-              Icon(CupertinoIcons.person_2, color: Colors.grey.shade100),
+              Icon(CupertinoIcons.chat_bubble_2, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.person_outline, color: Colors.white),
+          icon:
+              const Icon(Icons.person_outline, color: AppColors.secondaryColor),
           inactiveIcon: Icon(Icons.person_outline, color: Colors.grey.shade100),
           activeColorPrimary: AppColors.primaryIconColor),
     ];

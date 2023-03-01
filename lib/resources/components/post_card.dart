@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches, prefer_typing_uninitialized_variables
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/resources/color.dart';
@@ -11,11 +13,11 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(children: [
         //image section
         Container(
-          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16)
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16)
               .copyWith(right: 0),
           child: Row(children: [
             CircleAvatar(
@@ -26,20 +28,20 @@ class PostCard extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 8),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       snap['userName'],
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
               ),
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.more_horiz))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz))
           ]),
         ),
         //image section
@@ -60,24 +62,24 @@ class PostCard extends StatelessWidget {
                       SessionController().userId.toString(), snap['likes']);
                 },
                 icon: snap['likes'].contains(SessionController().userId)
-                    ? Icon(
+                    ? const Icon(
                         Icons.favorite,
                         color: Colors.red,
                       )
-                    : Icon(Icons.favorite_outline)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.comment_outlined)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.send_rounded)),
+                    : const Icon(Icons.favorite_outline)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.comment_outlined)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.send_rounded)),
             Expanded(
                 child: Align(
               alignment: Alignment.bottomRight,
               child: IconButton(
-                  onPressed: () {}, icon: Icon(Icons.bookmark_border_rounded)),
+                  onPressed: () {}, icon: const Icon(Icons.bookmark_border_rounded)),
             )),
           ],
         ),
         //description & number of comments
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,27 +89,27 @@ class PostCard extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 8),
                   child: RichText(
                     text: TextSpan(
-                        style: TextStyle(color: AppColors.primaryColor),
+                        style: const TextStyle(color: AppColors.primaryColor),
                         children: [
                           TextSpan(
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                             text: snap['userName'],
                           ),
                           TextSpan(
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                             text: ' ${snap['description']}',
                           )
                         ]),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Text(
                     DateFormat.yMMMd().format(snap['datePublished'].toDate()),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16, color: AppColors.secondaryColor),
                   ),
                 )

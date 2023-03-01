@@ -8,6 +8,7 @@ class Apis {
   static get user => FirebaseAuth.instance.currentUser!.uid;
   // usefull for getting conversatiomn id
   static String getConvesationId(String id) =>
+      // ignore: unnecessary_brace_in_string_interps
       user.hashCode <= id.hashCode ? '${user}_$id' : '${id}_${user}';
 // for getting all messages of a speccific conversation from db
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages(
