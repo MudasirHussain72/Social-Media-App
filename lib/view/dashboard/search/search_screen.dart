@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hive_mind/resources/color.dart';
@@ -16,7 +17,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late UserModel user;
-
+  // for storing search status
+  bool _isSearching = false;
   bool isShowUsers = false;
   final searchController = TextEditingController();
   @override
@@ -28,22 +30,50 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        // appBar: AppBar(
+        //   title: TextFormField(
+        //     decoration: InputDecoration(labelText: 'Search for a post'),
+        // onFieldSubmitted: (String _) {
+        //   setState(() {
+        //     isShowUsers = true;
+        //   });
+        //   print(_);
+        // },
+        //   ),
+        // ),
         appBar: AppBar(
-          title: TextFormField(
-            decoration: InputDecoration(labelText: 'Search for a post'),
-            onFieldSubmitted: (String _) {
-              setState(() {
-                isShowUsers = true;
-              });
-              print(_);
-            },
-          ),
+          title: _isSearching
+              ? TextFormField(
+                  decoration: InputDecoration(labelText: 'Search for a post'),
+                  onFieldSubmitted: (String _) {
+                    setState(() {
+                      isShowUsers = true;
+                    });
+                    print(_);
+                  },
+                )
+              : const Text('Hive Mind'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  _isSearching = !_isSearching;
+                  setState(() {
+                    isShowUsers = false;
+                  });
+                },
+                icon: Icon(
+                  _isSearching
+                      ? CupertinoIcons.clear_circled_solid
+                      : Icons.search,
+                  color: AppColors.primaryColor,
+                ))
+          ],
         ),
         body: isShowUsers
             ? FutureBuilder(
                 future: FirebaseFirestore.instance
-                    .collection('users')
-                    .where('userName',
+                    .collection('posts')
+                    .where('description',
                         isGreaterThanOrEqualTo: searchController.text)
                     .get(),
                 builder: (context, snapshot) {
@@ -55,60 +85,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   return ListView.builder(
                     itemCount: (snapshot.data! as dynamic).docs.length,
                     itemBuilder: (context, index) {
-                      // return ListTile(
-                      //     leading: CircleAvatar(
-                      //       backgroundImage: NetworkImage(
-                      // (snapshot.data! as dynamic)
-                      //     .docs[index]['profileImage']
-                      //               .toString()),
-                      //     ),
-                      //     title: Text(
-                      //       (snapshot.data! as dynamic).docs[index]['userName'],
-                      //     ));
-                      return Card(
-                        child: ListTile(
-                          onTap: () {
-                            // PersistentNavBarNavigator.pushNewScreen(
-                            //   context,
-                            //   screen: ChatScreen(user: user),
-                            //   withNavBar: false,
-                            // );
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => ChatScreen(user: user),
-                            //     ));
-                          },
-                          leading: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: AppColors.primaryIconColor)),
-                              child: (snapshot.data! as dynamic).docs[index]
-                                          ['profileImage'] ==
-                                      ''
-                                  ? const Icon(Icons.person_outline)
-                                  : ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(50)),
-                                      child: CachedNetworkImage(
-                                        imageUrl: (snapshot.data! as dynamic)
-                                            .docs[index]['profileImage']
-                                            .toString(),
-                                        placeholder: (context, url) =>
-                                            const CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(Icons.person),
-                                      ),
-                                    )),
-                          title: Text(
-                            (snapshot.data! as dynamic).docs[index]['userName'],
-                          ),
-                          subtitle: Text(
-                              (snapshot.data! as dynamic).docs[index]['email']),
-                        ),
+                      return Image.network(
+                        (snapshot.data! as dynamic).docs[index]['postUrl'],
                       );
                     },
                   );
