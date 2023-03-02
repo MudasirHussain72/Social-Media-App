@@ -17,7 +17,7 @@ class PostCard extends StatelessWidget {
       child: Column(children: [
         //image section
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16)
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10)
               .copyWith(right: 0),
           child: Row(children: [
             CircleAvatar(
@@ -45,41 +45,61 @@ class PostCard extends StatelessWidget {
           ]),
         ),
         //image section
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.35,
-          width: double.infinity,
-          child: Image.network(
-            snap['postUrl'],
-            fit: BoxFit.cover,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40)
+              .copyWith(right: 0),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    snap['postUrl'].toString(),
+                  ),
+                  fit: BoxFit.cover,
+                )),
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: double.infinity,
+            // child: Image.network(
+            //   snap['postUrl'],
+            //   fit: BoxFit.cover,
+            // ),
           ),
         ),
         //like comment section
-        Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  likePost(snap['postId'],
-                      SessionController().userId.toString(), snap['likes']);
-                },
-                icon: snap['likes'].contains(SessionController().userId)
-                    ? const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )
-                    : const Icon(Icons.favorite_outline)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.comment_outlined)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.send_rounded)),
-            Expanded(
-                child: Align(
-              alignment: Alignment.bottomRight,
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.bookmark_border_rounded)),
-            )),
-          ],
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 30).copyWith(right: 0),
+          child: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    likePost(snap['postId'],
+                        SessionController().userId.toString(), snap['likes']);
+                  },
+                  icon: snap['likes'].contains(SessionController().userId)
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(Icons.favorite_outline)),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.comment_outlined)),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.send_rounded)),
+              Expanded(
+                  child: Align(
+                alignment: Alignment.bottomRight,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.bookmark_border_rounded)),
+              )),
+            ],
+          ),
         ),
         //description & number of comments
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 40).copyWith(right: 0),
           child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,21 +112,23 @@ class PostCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8),
                   child: RichText(
                     text: TextSpan(
-                        style: const TextStyle(color: AppColors.primaryColor),
+                        style: const TextStyle(
+                            color: AppColors.primaryTextTextColor),
                         children: [
                           TextSpan(
                             style: const TextStyle(fontWeight: FontWeight.bold),
-                            text: snap['userName'],
+                            text: '${snap['userName']} : ',
                           ),
                           TextSpan(
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.caption,
                             text: ' ${snap['description']}',
                           )
                         ]),
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(vertical: 4)
+                      .copyWith(bottom: 0),
                   child: Text(
                     DateFormat.yMMMd().format(snap['datePublished'].toDate()),
                     style: const TextStyle(

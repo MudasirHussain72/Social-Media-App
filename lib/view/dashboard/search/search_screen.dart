@@ -1,11 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hive_mind/resources/color.dart';
-import 'package:hive_mind/view/dashboard/chat/chat_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:hive_mind/model/user_model.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -30,26 +28,18 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: TextFormField(
-        //     decoration: InputDecoration(labelText: 'Search for a post'),
-        // onFieldSubmitted: (String _) {
-        //   setState(() {
-        //     isShowUsers = true;
-        //   });
-        //   print(_);
-        // },
-        //   ),
-        // ),
         appBar: AppBar(
           title: _isSearching
               ? TextFormField(
-                  decoration: InputDecoration(labelText: 'Search for a post'),
+                  decoration:
+                      const InputDecoration(labelText: 'Search for a post'),
                   onFieldSubmitted: (String _) {
                     setState(() {
                       isShowUsers = true;
                     });
-                    print(_);
+                    if (kDebugMode) {
+                      print(_);
+                    }
                   },
                 )
               : const Text('Hive Mind'),
@@ -78,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     .get(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -96,15 +86,23 @@ class _SearchScreenState extends State<SearchScreen> {
                 future: FirebaseFirestore.instance.collection('posts').get(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                   return StaggeredGridView.countBuilder(
                     crossAxisCount: 3,
                     itemCount: (snapshot.data! as dynamic).docs.length,
-                    itemBuilder: (context, index) => Image.network(
-                      (snapshot.data! as dynamic).docs[index]['postUrl'],
+                    itemBuilder: (context, index) => Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                (snapshot.data! as dynamic)
+                                    .docs[index]['postUrl']
+                                    .toString(),
+                              ),
+                              fit: BoxFit.cover)),
                     ),
                     staggeredTileBuilder: (index) => StaggeredTile.count(
                         (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1),

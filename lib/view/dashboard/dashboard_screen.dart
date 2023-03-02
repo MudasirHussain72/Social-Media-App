@@ -57,7 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Icon(CupertinoIcons.search, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.add, color: AppColors.secondaryColor),
-          activeColorPrimary: AppColors.primaryIconColor,
+          activeColorPrimary: AppColors.secondaryColor,
           inactiveIcon: Icon(Icons.add, color: Colors.grey.shade100)),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.chat_bubble_2,

@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/provider/user_profile_provider.dart';
 import 'package:hive_mind/services/session_manager.dart';
 import 'package:hive_mind/resources/color.dart';
+import 'package:hive_mind/utils/routes/route_name.dart';
+import 'package:hive_mind/view/login/login_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -161,6 +165,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           : document['email'],
                                       iconData: Icons.alternate_email),
                                 ),
+                                InkWell(
+                                    onTap: () {
+                                      FirebaseAuth auth = FirebaseAuth.instance;
+                                      auth.signOut().then(
+                                        (value) {
+                                          SessionController().userId = '';
+                                          PersistentNavBarNavigator
+                                              .pushNewScreenWithRouteSettings(
+                                            context,
+                                            settings: const RouteSettings(
+                                                name: RouteName.loginView),
+                                            screen: const LoginScreen(),
+                                            withNavBar: false,
+                                            pageTransitionAnimation:
+                                                PageTransitionAnimation
+                                                    .cupertino,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: const ReusableRow(
+                                        title: '',
+                                        value: 'Logout',
+                                        iconData: Icons.logout))
                               ],
                             );
                           } else {

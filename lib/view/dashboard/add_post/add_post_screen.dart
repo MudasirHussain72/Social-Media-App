@@ -1,5 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_mind/model/user_model.dart' as model;
@@ -18,6 +20,7 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   bool isLoading = false;
+  static String? profileImage;
   TextEditingController captionController = TextEditingController();
   Uint8List? _file;
   _selectImage(BuildContext context) async {
@@ -66,14 +69,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
   void postImage(
     String uid,
     String userName,
-    String profImage,
+    String profileImage,
   ) async {
     setState(() {
       isLoading = true;
     });
     try {
       String res = await AddPostProvider().uploadPost(
-          captionController.text.trim(), _file!, uid, userName, profImage);
+          captionController.text.trim(), _file!, uid, userName, profileImage);
       if (res == 'success') {
         setState(() {
           isLoading = false;
@@ -100,10 +103,24 @@ class _AddPostScreenState extends State<AddPostScreen> {
     });
   }
 
+  showDisplayName() async {
+    var collection = FirebaseFirestore.instance.collection('users');
+    var docSnapshot =
+        await collection.doc(FirebaseAuth.instance.currentUser!.uid).get();
+    Map<String, dynamic> data = docSnapshot.data()!;
+    profileImage = data['profileImage'];
+  }
+
   @override
   void dispose() {
     super.dispose();
     captionController.dispose();
+  }
+
+  @override
+  void initState() {
+    showDisplayName();
+    super.initState();
   }
 
   @override
@@ -132,7 +149,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       postImage(
                         user.uid.toString(),
                         user.userName.toString(),
-                        user.profileImage.toString(),
+                        profileImage.toString(),
                       );
                     },
                     child: const Text('Post'))
